@@ -11,7 +11,7 @@ const signIn = async (req, res) => {
     const { error } = signInSchema.validate(req.body);
     if (error) {
       return res.status(400).json({
-        error: details[0].message,
+        error: error.details[0].message,
       });
     }
     const existUser = await User.findOne({

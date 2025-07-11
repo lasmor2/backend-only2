@@ -5,6 +5,7 @@ const signOut = require("../controller/signoutController");
 const { sendVerificationCode } = require("../controller/sendVerification");
 const { verifyUser } = require("../controller/sendVerification");
 const identifier = require("../middlewares/identification");
+const changePassword = require("../controller/changePassword");
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.post("/signout", identifier, signOut);
 
 router.patch("/verify", identifier, sendVerificationCode);
 router.patch("/verifyCode", identifier, verifyUser);
+router.patch("/changePassword", identifier, changePassword);
 
 module.exports = router;

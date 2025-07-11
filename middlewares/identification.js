@@ -16,7 +16,10 @@ const identifier = (req, res, next) => {
     });
   }
   try {
-    const userToken = token.split(" ")[1];
+    let userToken = token;
+    if (token.startsWith("Bearer ")) {
+      userToken = token.split(" ")[1];
+    }
     const jwtVerified = jwt.verify(userToken, process.env.JWT_SECRET_KEY);
     if (jwtVerified) {
       req.user = jwtVerified;
@@ -26,5 +29,12 @@ const identifier = (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
+    return res.status(401).json({
+      success: false,
+      message: "Token verification failed",
+      error: error.message,
+    });
   }
 };
+
+module.exports = identifier;
