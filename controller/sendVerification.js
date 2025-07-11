@@ -3,7 +3,6 @@ const crypto = require("crypto");
 const transport = require("../middlewares/mailer");
 const { hmacProcess } = require("../utils/hashedPassword");
 const acceptSchema = require("../middlewares/verified");
-c;
 
 const sendVerificationCode = async (req, res) => {
   const { email } = req.body;
@@ -57,15 +56,13 @@ const sendVerificationCode = async (req, res) => {
 };
 
 const verifyUser = async (req, res) => {
-  const { email, code } = req.body;
+  const { email, providedCode } = req.body;
   try {
     const { error, value } = acceptSchema.validate(req.body);
     if (error) {
-      return res.status(400).json({
-        error: details[0].message,
-      });
+      return res.status(400).json({ error: error.details[0].message });
     }
-    const codeValue = code.toString();
+    const codeValue = providedCode.toString();
     const existUser = await User.findOne({ email }).select(
       "+verificationCode +verificationCodeVAlidation"
     );
