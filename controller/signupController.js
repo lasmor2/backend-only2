@@ -1,5 +1,5 @@
-const signUpSchema = require("../middlewares/signinValidation");
-const hashedPassword = require("../utils/hashedPassword");
+const signUpSchema = require("../middlewares/signupValidation");
+const { hashedPassword } = require("../utils/hashedPassword");
 const User = require("../models/userModel");
 
 const signUp = async (req, res) => {

@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const authRouter = require("./routers/authRouter");
 
+
+
 connectDb();
 
 const app = express();
@@ -28,3 +30,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
