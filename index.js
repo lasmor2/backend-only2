@@ -5,12 +5,12 @@ const cors = require("cors");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
-const router = require("./routers/router");
+const authRouter = require("./routers/authRouter");
 
 connectDb();
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 4001;
 
 app.use(express.json());
 app.use(cors());
@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-app.use("/api", router);
+app.use("/api/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.send("server is running!");
