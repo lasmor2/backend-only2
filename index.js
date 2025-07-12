@@ -6,8 +6,7 @@ const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const authRouter = require("./routers/authRouter");
-
-
+const postRouter = require("./routers/postRouter");
 
 connectDb();
 
@@ -22,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.use("/api/auth", authRouter);
+app.use("/api/posts", postRouter);
 
 app.get("/", (req, res) => {
   res.send("server is running!");
@@ -30,5 +30,3 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-
